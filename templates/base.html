@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="main-header">Chat with Friends</h1>
+    <form  method="post">
+    <div><span style="font-size:22px; margin: 15px 0px;display: block; font-weight: bold;">Enter your details and start messaging</span></div>
+    
+    <div class="label" >
+        <label for="m-name">Your name</label>
+        <input type="text" name="m-name" id="m-name" value="{{ name }}" readonly/>
+    </div>
+
+    <div class="label">
+        <label for="m-age">Your age</label>
+        <select name="m-age" id="m-age" required>
+            <option value="unknown">Select age</option>
+            <option value="13-17">13 to 17</option>
+            <option value="18-30">18 to 30</option>
+            <option value="31-40">31 to 40</option>
+            <option value="41-50">41 to 50</option>
+            <option value="51+">51+</option>
+        </select>
+    </div>
+
+    <div class="label">
+        <label for="m-gender">Your Gender</label>
+        <select name="m-gender" id="m-gender" required>
+            <option value="unknown">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+    </div>
+
+    <!--<div class="label">
+        <label for="m-looking-gender">I'm looking for</label>
+        <select name="m-looking-gender" id="m-looking-gender">
+            <option value="unknown">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+    </div>-->
+    <div class="label">
+    <input type="text" placeholder="Room Code" name="code" value="{{code}}" />
+    <button type="submit" name="join" class="norm-btn">Join a Room</button>
+    </div>
+    <button type="submit" name="create"  class="norm-btn" >Create a Room</button>
+
+    <div class="label">
+        <small>By clicking below button you agree to our terms of using service</small>
+    </div>
+    {% if error %}
+  <ul>
+    <li>{{error}}</li>
+  </ul>
+  {% endif %}
+
+</form>
+</body>
+
+</html>

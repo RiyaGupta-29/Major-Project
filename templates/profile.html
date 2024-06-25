@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information Form for Mental Health</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h4 {
+            color: #0056b3;
+        }
+        .form-section {
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-check-label {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Patient Information Form for Mental Health</h2>
+    <form>
+        <div class="form-group">
+            <h4>Personal Information</h4>
+            <label for="fullName">Full Name:</label>
+            <input type="text" class="form-control" value="{{ name }}" id="fullName" readonly>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" class="form-control" id="dob" required>
+
+            <label>Gender:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                <label class="form-check-label" for="other">Other</label>
+            </div>
+            <input type="text" class="form-control mt-2" id="otherGender">
+
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" class="form-control" id="phoneNumber" required>
+
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" value="{{ email }}" readonly>
+
+            <h5>Emergency Contact</h5>
+            <label for="emergencyContactName">Name:</label>
+            <input type="text" class="form-control" id="emergencyContactName" required>
+
+            <label for="emergencyContactRelationship">Relationship:</label>
+            <input type="text" class="form-control" id="emergencyContactRelationship" required>
+
+            <label for="emergencyContactPhone">Phone Number:</label>
+            <input type="tel" class="form-control" id="emergencyContactPhone" required>
+        </div>
+
+        <div class="form-group">
+            <h4>Insurance Information</h4>
+            <label for="insuranceProvider">Insurance Provider:</label>
+            <input type="text" class="form-control" id="insuranceProvider" required>
+
+            <label for="policyNumber">Policy Number:</label>
+            <input type="text" class="form-control" id="policyNumber" required>
+
+            <label for="groupNumber">Group Number:</label>
+            <input type="text" class="form-control" id="groupNumber" required>
+
+            <label for="policyHolderName">Policy Holder's Name:</label>
+            <input type="text" class="form-control" id="policyHolderName" required>
+        </div>
+
+        <div class="form-group">
+            <h4>Referral Information</h4>
+            <label>Referred by:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="referredBy" id="self" value="Self">
+                <label class="form-check-label" for="self">Self</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="referredBy" id="physician" value="Physician">
+                <label class="form-check-label" for="physician">Physician</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="referredBy" id="familyFriend" value="Family/Friend">
+                <label class="form-check-label" for="familyFriend">Family/Friend</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="referredBy" id="otherReferral" value="Other">
+                <label class="form-check-label" for="otherReferral">Other</label>
+            </div>
+            <input type="text" class="form-control mt-2" id="otherReferredBy">
+
+            <label for="referringPhysicianName">If referred by a physician, please provide their name and contact details:</label>
+            <input type="text" class="form-control" id="referringPhysicianName">
+
+            <label for="referringPhysicianPhone">Phone Number:</label>
+            <input type="tel" class="form-control" id="referringPhysicianPhone">
+
+            <label for="referringPhysicianAddress">Address:</label>
+            <input type="text" class="form-control" id="referringPhysicianAddress">
+        </div>
+
+        <div class="form-group">
+            <h4>Medical History</h4>
+            <label for="currentMedications">Current Medications (include dosage and frequency):</label>
+            <textarea class="form-control" id="currentMedications" rows="3" required></textarea>
+
+            <label for="pastPsychiatricHistory">Past Psychiatric History (diagnoses, treatments, hospitalizations):</label>
+            <textarea class="form-control" id="pastPsychiatricHistory" rows="3" required></textarea>
+
+            <label for="medicalConditions">Medical Conditions (chronic illnesses, surgeries, etc.):</label>
+            <textarea class="form-control" id="medicalConditions" rows="3" required></textarea>
+
+            <label for="familyHistoryMentalHealth">Family History of Mental Health Issues (e.g., depression, anxiety, bipolar disorder, schizophrenia):</label>
+            <textarea class="form-control" id="familyHistoryMentalHealth" rows="3" required></textarea>
+
+            <label for="allergies">Allergies (medications, food, other):</label>
+            <textarea class="form-control" id="allergies" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <h4>Psychosocial History</h4>
+            <label>Marital Status:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="single" value="Single">
+                <label class="form-check-label" for="single">Single</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="married" value="Married">
+                <label class="form-check-label" for="married">Married</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="divorced" value="Divorced">
+                <label class="form-check-label" for="divorced">Divorced</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="widowed" value="Widowed">
+                <label class="form-check-label" for="widowed">Widowed</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="otherMaritalStatus" value="Other">
+                <label class="form-check-label" for="otherMaritalStatus">Other</label>
+            </div>
+            <input type="text" class="form-control mt-2" id="otherMaritalStatusText">
+
+            <label for="children">Children (number and ages):</label>
+            <textarea class="form-control" id="children" rows="2" required></textarea>
+
+            <label for="livingSituation">Living Situation (alone, with family, etc.):</label>
+            <textarea class="form-control" id="livingSituation" rows="2" required></textarea>
+
+            <label for="occupation">Occupation:</label>
+            <input type="text" class="form-control" id="occupation" required>
+
+            <label for="educationalBackground">Educational Background:</label>
+            <input type="text" class="form-control" id="educationalBackground" required>
+
+            <label for="currentStressors">Current Stressors (family, work, financial, etc.):</label>
+            <textarea class="form-control" id="currentStressors" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <h4>Substance Use</h4>
+            <label>Do you use tobacco?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tobaccoUse" id="tobaccoYes" value="Yes">
+                <label class="form-check-label" for="tobaccoYes">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tobaccoUse" id="tobaccoNo" value="No">
+                <label class="form-check-label" for="tobaccoNo">No</label>
+            </div>
+
+            <label>Do you consume alcohol?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="alcoholUse" id="alcoholYes" value="Yes">
+                <label class="form-check-label" for="alcoholYes">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="alcoholUse" id="alcoholNo" value="No">
+                <label class="form-check-label" for="alcoholNo">No</label>
+            </div>
+
+            <label for="alcoholFrequency">If yes, how often and how much:</label>
+            <textarea class="form-control" id="alcoholFrequency" rows="2"></textarea>
+
+            <label>Do you use recreational drugs?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="drugUse" id="drugsYes" value="Yes">
+                <label class="form-check-label" for="drugsYes">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="drugUse" id="drugsNo" value="No">
+                <label class="form-check-label" for="drugsNo">No</label>
+            </div>
+
+            <label for="drugSpecify">If yes, specify:</label>
+            <textarea class="form-control" id="drugSpecify" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+            <h4>Mental Health Assessment</h4>
+            <label for="primaryReason">Primary Reason for Seeking Help (main concerns, symptoms, etc.):</label>
+            <textarea class="form-control" id="primaryReason" rows="3" required></textarea>
+
+            <label>Have you experienced any of the following symptoms?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomDepression" value="Depression">
+                <label class="form-check-label" for="symptomDepression">Depression</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomAnxiety" value="Anxiety">
+                <label class="form-check-label" for="symptomAnxiety">Anxiety</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomPanicAttacks" value="Panic Attacks">
+                <label class="form-check-label" for="symptomPanicAttacks">Panic Attacks</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomMoodSwings" value="Mood Swings">
+                <label class="form-check-label" for="symptomMoodSwings">Mood Swings</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomSuicidalThoughts" value="Suicidal Thoughts">
+                <label class="form-check-label" for="symptomSuicidalThoughts">Suicidal Thoughts</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomSelfHarm" value="Self-Harm">
+                <label class="form-check-label" for="symptomSelfHarm">Self-Harm</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomHallucinations" value="Hallucinations">
+                <label class="form-check-label" for="symptomHallucinations">Hallucinations</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomParanoia" value="Paranoia">
+                <label class="form-check-label" for="symptomParanoia">Paranoia</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomSleepDisturbances" value="Sleep Disturbances">
+                <label class="form-check-label" for="symptomSleepDisturbances">Sleep Disturbances</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomEatingDisorders" value="Eating Disorders">
+                <label class="form-check-label" for="symptomEatingDisorders">Eating Disorders</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="symptomOthers" value="Others">
+                <label class="form-check-label" for="symptomOthers">Others:</label>
+                <input type="text" class="form-control mt-2" id="otherSymptoms">
+            </div>
+
+            <label for="previousMentalHealth">Have you previously seen a mental health professional?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="previousMentalHealth" id="previousYes" value="Yes">
+                <label class="form-check-label" for="previousYes">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="previousMentalHealth" id="previousNo" value="No">
+                <label class="form-check-label" for="previousNo">No</label>
+            </div>
+            <label for="mentalHealthDetails">If yes, please provide details (therapist/psychiatrist name, duration of treatment, etc.):</label>
+            <textarea class="form-control" id="mentalHealthDetails" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <h4>Additional Information</h4>
+            <label for="additionalInfo">Is there anything else you would like to share that would help us better understand your situation and provide the best care?</label>
+            <textarea class="form-control" id="additionalInfo" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="consent">I consent to the collection and use of the above information for the purpose of my mental health treatment.</label>
+            <input type="checkbox" class="form-check-input" id="consent" required>
+            <label class="form-check-label" for="consent">I agree</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

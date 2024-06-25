@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta nae="viewport" content="width=device-width, initial-scale=1.0">
+
+<title> DASS Result </title> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/end.css') }}">
+<link rel="icon" href="{{ url_for('static', filename='images/favicon1.jpg') }}" type="image/x-icon">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class = "preload">
+ <div class = "ring">
+<img src="{{ url_for('static', filename='images/preloader.png') }}"  class="preloadpng" alt="preload" width="320px" height="320px">
+ </div>  
+
+<div class="harry">
+<img src="{{ url_for('static', filename='images/pic.jpg') }}" alt="backgroundpicture" class="background">
+<div class="container">
+ <div id="end" class="flex-center flex-column">
+    <h2 id="DScore"></h2>
+    <h2 id="AScore"></h2>
+    <h2 id="SScore"></h2>
+    <table>
+        <tr>
+            <th>Scoring</th>
+            <th>Depression</th>
+            <th>Anxiety</th>
+            <th>Stress</th>
+        </tr>
+        <tr>
+            <td>Normal</td>
+            <td>0 - 9</td>
+            <td>0 - 7</td>
+            <td>0 - 14</td>
+        </tr>
+        <tr>
+            <td>Mild</td>
+            <td>10 - 13</td>
+            <td>8 - 9</td>
+            <td>15 - 18</td>
+        </tr>
+        <tr>
+            <td>Moderate</td>
+            <td>14 - 20</td>
+            <td>10 - 14</td>
+            <td>19 - 25</td>
+        </tr>
+        <tr>
+            <td>Severe</td>
+            <td>21 - 27</td>
+            <td>15 - 19</td>
+            <td>26 - 33</td>
+        </tr>
+        <tr>
+            <td>Extremely Severe</td>
+            <td>28+</td>
+            <td>20+</td>
+            <td>34+</td>
+        </tr>
+    </table>
+    <h3 id="user"></h3>
+    <form class="end-form-container">
+    <h3 id="end-text"> Save your score! </h3> 
+    <button class="saveScoreBtn" id="saveScoreBtn" type="button">Save</button>
+    </form>
+    <a href="{{ url_for('quiz') }}" class="btn"> Play Again</a>
+ </div>
+</div>
+</div>
+<script src="{{ url_for('static', filename='js/preload.js') }}"></script>
+<script src="{{ url_for('static', filename='js/end.js') }}"></script>
+</body>
+</html>

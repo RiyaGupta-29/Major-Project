@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K10 Test</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    body {
+      background-color:pink;
+    }
+
+    .option-label {
+      margin-right: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: inline-block; /* Display the labels and radio buttons on the same line */
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      display: inline-block; /* Display the radio buttons inline */
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <form id="KForm" class="container mt-4" action="/submit" method="post">
+    <h1 class="mb-4 text-center">K10 TEST</h1>
+    <p id="ratingScaleNote" class="mb-4">Note: The rating scale is as follows:
+      <br>1 - None of the time
+      <br>2 -  A little of the time
+      <br>3 - Some of the time 
+      <br>4 - Most of the time 
+      <br>5 - All of the time
+    </p>
+    <!-- Questions will be generated dynamically using JavaScript -->
+
+    <!-- Submit button -->
+    <br>
+
+    <script>
+      // Example questions and variables (you can customize this array)
+      const questions = [
+      "During the last 30 days, about how often did you feel tired out for no good reason?",
+      "During the last 30 days, about how often did you feel nervous?",
+      "During the last 30 days, about how often did you feel so nervous that nothing could calm you down?",
+      "During the last 30 days, about how often did you feel hopeless?",
+      "During the last 30 days, about how often did you feel restless or fidgety?",
+      "During the last 30 days, about how often did you feel so restless you could not sit still?",
+      "During the last 30 days, about how often did you feel depressed?",
+      "During the last 30 days, about how often did you feel that everything was an effort?",
+      "During the last 30 days, about how often did you feel so sad that nothing could cheer you up?",
+      "During the last 30 days, about how often did you feel worthless?"
+      // Add more questions as needed
+      ];
+
+      // Generate form questions dynamically
+      const form = document.getElementById("KForm");
+      for (let i = 0; i < questions.length; i++) {
+        const questionNumber = i + 1;
+        const questionVariable = `q${questionNumber}`;
+
+        const questionLabel = document.createElement("label");
+        questionLabel.textContent = `${questionNumber}. ${questions[i]}`;
+
+        form.appendChild(questionLabel);
+
+        for (let j = 0; j <= 3; j++) {
+          const radioInput = document.createElement("input");
+          radioInput.type = "radio";
+          radioInput.name = questionVariable;
+          radioInput.value = j;
+          radioInput.id = `${questionVariable}_${j}`;
+
+          const label = document.createElement("label");
+          label.textContent = ` ${j}`;
+          label.setAttribute("for", `${questionVariable}_${j}`);
+          label.classList.add("option-label");
+
+          form.appendChild(radioInput);
+          form.appendChild(label);
+        }
+        const lineBreak = document.createElement("br");
+        form.appendChild(lineBreak);
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        let totalSum = 0;
+
+        for (let i = 0; i < questions.length; i++) {
+          const questionNumber = i + 1;
+          const questionVariable = `q${questionNumber}`;
+
+          const selectedOption = document.querySelector(`input[name="${questionVariable}"]:checked`);
+          if (selectedOption) {
+            totalSum += parseInt(selectedOption.value, 10);
+          }
+        }
+
+        let resultCategory = "";
+        if (totalSum >= 0 && totalSum <= 14) {
+          resultCategory = "Well";
+        } else if (totalSum >= 15 && totalSum <= 19) {
+          resultCategory = "Mild Mental Disorder";
+        } else if (totalSum >= 20 && totalSum <= 24) {
+          resultCategory = "Moderate Mental Disorder";
+        } else if (totalSum >= 25) {
+          resultCategory = "Severe Mental Disorder";
+        }
+
+        alert(`Total Sum: ${totalSum}\nResult Category: ${resultCategory}`);
+        form.reset();
+      });
+    </script>
+    <button type="submit" class="btn btn-primary mb-4">Submit</button>
+
+  </form>
+
+</body>
+</html>

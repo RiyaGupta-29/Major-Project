@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Custom styles for the draggable thought box */
+        body {
+          background-image: url('../static/images/thought_image.jpg'); /* Replace 'your_background_image_path.jpg' with the actual path to your background image */
+          background-size: cover;
+          background-position: center;
+          height: 100vh;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+        .draggable {
+            
+            position: absolute;
+            cursor: move;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <title>Thoughts App</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="thoughtContainer"></div>
+                <div id="thoughtBoxTemplate" class="draggable" style="display: none;">
+                    <div class="thought-content"></div>
+                    <button class="btn btn-danger delete-thought">Delete Thought</button>
+                </div>
+                <textarea id="thoughtInput" class="form-control mt-2" rows="3" placeholder="Write your thought and press Enter..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        // Store thoughts in an array
+        const thoughts = [];
+
+        // Create a new thought box
+        function createThoughtBox(text) {
+            const thoughtContainer = document.getElementById("thoughtContainer");
+            const thoughtBoxTemplate = document.getElementById("thoughtBoxTemplate");
+            
+            const newThoughtBox = thoughtBoxTemplate.cloneNode(true);
+            newThoughtBox.style.display = "block";
+            newThoughtBox.querySelector(".thought-content").innerText = text;
+
+            // Make the new thought box draggable
+            dragElement(newThoughtBox);
+
+            // Add delete functionality to the new thought box
+            newThoughtBox.querySelector(".delete-thought").addEventListener("click", function () {
+                thoughtContainer.removeChild(newThoughtBox);
+                const index = thoughts.indexOf(text);
+                if (index !== -1) {
+                    thoughts.splice(index, 1);
+                }
+            });
+
+            // Add the new thought box to the container
+            thoughtContainer.appendChild(newThoughtBox);
+        }
+
+        // Make an element draggable
+        function dragElement(elmnt) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById(elmnt.id + "-header")) {
+                // if present, the header is where you move the DIV from:
+                document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
+            } else {
+                // otherwise, move the DIV from anywhere inside the DIV:
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                // stop moving when mouse button is released:
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        // Add event listener to the thought input
+        document.getElementById("thoughtInput").addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && this.value.trim() !== "") {
+                const newThought = this.value.trim();
+                thoughts.push(newThought);
+                createThoughtBox(newThought);
+                this.value = "";
+            }
+        });
+    </script>
+</body>
+</html>

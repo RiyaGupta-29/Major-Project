@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/72215895a8.js" crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='css/payment.css') }}" rel="stylesheet">
+    <title>PAYMENT</title>
+</head>
+
+<body>
+   <!-- <div id="navbar">
+        <img id="logo" src="https://bit.ly/3LDsXgz" alt="">-->
+
+        <div id="nav2">
+            <h5>PAYMENT</h5>
+        </div>
+        <div id="nav3">
+            <img src="https://constant.myntassets.com/checkout/assets/img/sprite-secure.png" alt="">
+            <p>100 % <b>SECURE</b></p>
+        </div>
+    </div>
+    <div id="cart">
+        <div id="main1">
+            <h4>Choose Payment Mode</h4>
+            <div id="payment">
+                <div id="mode">
+                    <div>
+                        <i class="fa-brands fa-amazon-pay"></i>
+                        <h5>Cash On Delivery (Cash/Card/UPI)</h5>
+                    </div>
+                    <div id="card">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <h5>Credit/Debit Card</h5>
+                    </div>
+                    <div>
+                        <i class="fa-brands fa-cc-amazon-pay"></i>
+                        <h5>PhonePe/Google Pay/BHIM UPI</h5>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-wallet"></i>
+                        <h5>Paytm/Payzapp/Wallets</h5>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-building-columns"></i>
+                        <h5>Net Banking</h5>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-money-check-dollar"></i>
+                        <h5>EMI/Pay Later</h5>
+                    </div>
+                </div>
+                <div id="paymentDiv">
+                    <a href="end.html">
+                        
+                   <h4>CASH ON DELIVERY</h4> </a>
+                
+
+                    <a href="#">
+                        <div id="pay">
+                            PAY NOW
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!--- inserted new box n removed the div id'd "main2"---->
+        <div class="orderbox">
+            <div class="pricedets">PRICE DETAILS</div>
+            <div class="total">
+               <span>Monthly deal</span><span class="totalprice">Rs 100/- per month</span> 
+            </div>
+            <div class="discount">
+              <span>exclusive deal</span><span class="filldiscount">Rs 450/- for 6 months</span> 
+           </div>
+      
+           <div class="amount">
+              <span>yearly deal</span><span class="amount_pay">Rs 1000/- for 12 months</span> 
+           </div> 
+        
+        
+    
+          </div>
+    
+    
+    
+    
+    </div>
+</body>
+
+</html>
+
+<!--<script>
+
+    var amount = localStorage.getItem("amount");
+ 
+        document.querySelector(".amount_pay").innerText= amount;
+
+       var MRP= localStorage.getItem("MRP");
+       document.querySelector(".totalprice").innerText= MRP;
+
+      var discount= localStorage.getItem("discount")
+        document.querySelector(".filldiscount").innerText= "- "+discount;
+
+
+        var itemcount= localStorage.getItem("itemcount")
+        document.querySelector(".pricedets").innerText= `PRICE DETAILS ( ${itemcount} Items)`;
+
+           
+
+        document.querySelector("#first").addEventListener("click",function(){
+            window.location.href ="../wishlist/cart.html"
+        })
+
+        document.querySelector("#second").addEventListener("click",function(){
+            window.location.href ="../payment/address.html"
+        })
+</script>-->

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('../static/images/puzzle_image.jpg') center/cover no-repeat; /* Replace 'your_background_image.jpg' with the actual image path */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #scramble-container {
+            border: 2px solid #333;
+            width: 250px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background-color: #fff; /* Set background color to white */
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #input-container {
+            text-align: center;
+        }
+
+        #user-input {
+            padding: 15px;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        #submit-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 2;
+            font-weight: bold; /* Set font weight to bold */
+        }
+    </style>
+    <title>Word Scramble Game</title>
+</head>
+<body>
+    <div id="scramble-container">
+        <!-- Unscrambled word will be added dynamically -->
+    </div>
+
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Type the unscrambled word">
+        <button id="submit-btn" onclick="checkWord()">Submit</button>
+    </div>
+
+    <div id="popup"></div>
+
+    <script>
+        const scrambleContainer = document.getElementById('scramble-container');
+        const userInput = document.getElementById('user-input');
+        const popup = document.getElementById('popup');
+        const words = ["APPLE", "ORANGE", "BANANA", "GRAPES"];
+        let currentWordIndex = 0;
+
+        showScrambledWord();
+
+        function showScrambledWord() {
+            const scrambledWord = scrambleWord(words[currentWordIndex]);
+            scrambleContainer.innerText = scrambledWord;
+        }
+
+        function scrambleWord(word) {
+            return word.split('').sort(() => Math.random() - 0.5).join('');
+        }
+
+        function checkWord() {
+            const enteredWord = userInput.value.toUpperCase();
+            const currentWord = words[currentWordIndex];
+
+            if (enteredWord === currentWord) {
+                if (currentWordIndex === words.length - 1) {
+                    showPopup('Yay! You did it! Game Over');
+                } else {
+                    showPopup('Yay! You did it!');
+                    userInput.value = ''; // Clear the input field
+                    nextWord();
+                }
+            }
+        }
+
+        function showPopup(message) {
+            popup.innerText = message;
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }
+
+        function nextWord() {
+            currentWordIndex++;
+            if (currentWordIndex === words.length) {
+                currentWordIndex = 0;
+            }
+            showScrambledWord();
+        }
+    </script>
+</body>
+</html>

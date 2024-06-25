@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends Nearby</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Friends Nearby</h1>
+        <ul class="list-group mb-4">
+            {% for user in users %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ user.name }} - {{ user.distance }} km away
+                <button class="btn btn-primary btn-send-request" data-user-id="{{ user.id }}">Send Friend Request</button>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="mb-4">Received Friend Requests</h2>
+        <ul class="list-group">
+            {% for user_id in friend_requests %}
+                {% for user in users %}
+                    {% if user.id == user_id %}
+                    <li class="list-group-item">
+                        Friend request from: {{ user.name }}
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-send-request').click(function() {
+                const userId = $(this).data('user-id');
+                $.post('/send_friend_request', { user_id: userId }, function(response) {
+                    if (response.status === 'success') {
+                        alert('Friend request sent to user ' + response.user_id);
+                        location.reload(); // Reload the page to see the updated friend requests
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
