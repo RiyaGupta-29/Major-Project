@@ -1,0 +1,4 @@
+host: localhost
+user: root
+password: Niap@2023
+database: customer
